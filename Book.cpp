@@ -203,11 +203,11 @@ void Book::print() const
         }
     }
 
-    std::cout << "Title: " << title_ 
-              << "Author: " << author_ 
-              << "ISBN: " << ISBN_ 
-              << "Icon: " << icon 
-              << "Price: $" << std::fixed << std::setprecision(2) << price_ 
-              << "Keywords: " << keywords 
+    std::cout << "Title: " << title_; 
+              << "Author: " << author_;
+              << "ISBN: " << ISBN_; 
+              << "Icon: " << icon;
+              << "Price: $" << std::fixed << std::setprecision(2) << price_:
+              << "Keywords: " << keywords: 
               << "Blurb: " << blurb_;
 }
