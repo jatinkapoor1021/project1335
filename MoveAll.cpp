@@ -1,28 +1,37 @@
 #include "MoveAll.hpp"
 #include "Book.hpp"
-#include <vector>
-#include <string>
 
-int moveAll(std::vector<Book>& catalog, std::vector<Book>& cart, const std::string& keyword) {
-    int books_moved = 0;
-    auto it = catalog.begin();
-    while (it != catalog.end()) {
-        if (containsKeyword(*it, keyword)) {
-            cart.push_back(std::move(*it)); // Move the book to the cart
-            it = catalog.erase(it); // Remove the book from the catalog
-            ++books_moved;
-        } else {
-            ++it;
-        }
-    }
-    return books_moved;
-}
+// Moves all Books in "source" with the specified keyword to "dest".
+// A Book is moved if any of its keywords match the one specified in this function.
+// Use iterators whenever appropriate.
+// Hint: you need a const iterator for a const vector, but this will be automatically handled using "auto".
 
-bool containsKeyword(const Book& book, const std::string& keyword) {
-    for (const auto& key : book.keywords_) {
-        if (key == keyword) {
-            return true;
-        }
+void moveAll (const std::string keyword, std::vector<Book> &source, std::vector<Book> &dest){
+  const auto t1_start = std::chrono::steady_clock::now();
+  int books_moved=0; // counts books moved
+  // DO NOT ALTER ABOVE HERE
+
+//modified code
+  for (auto it = source.begin(); it != source.end(); it++)
+  {
+
+
+    for (auto const &kw : it->getKeywords())
+    {
+      if (kw == keyword)
+      {
+        dest.push_back(std::move(*it));
+        it = source.erase(it);
+        books_moved++;
+        it--;
+        break;
+      }
     }
-    return false;
+  }
+
+
+  // DO NOT ALTER BELOW HERE
+  const auto t1_end = std::chrono::steady_clock::now();
+  int t1 = std::chrono::duration <double, std::micro> (t1_end - t1_start).count();
+  std::cout << "Moved " << books_moved << " books in " << t1 << " microseconds." << std::endl;
 }
