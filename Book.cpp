@@ -179,20 +179,42 @@ void Book::setBlurb(const std::string &blurb)
 // constructor  void Book::print()
 void Book::print() const
 {
-    std::cout << "Title: " << getTitle() << "\nAuthor: " << getAuthor() << "\nIBSN: " << getIBSN() << "\nIcon: "
-    for(int i = 0; i<80; i++){
-        std::cout << icon_[i] << " ";
-    }
-    std::cout << "\nPrice: " << std::setprecision(2) << std::fixed << getPrice() << "\nKeywords: ";
-    for(int i = 0; i< getKeywords().size(); i++) {
-        if(getKeywords()[i] == getKeywords().back()){
-            std::cout << getKeywords()[i] << "\n";
-        }
-        else{
-            std::cout << getKeywords()[i] << ", ";
-        }
-    }
-    std::cout << "Blurb: " <<getBlurb() << "\n";
+   std::string keywords;
+   for (auto kw = this->getKeywords().begin(); kw != this->getKeywords().end(); kw++)
+   {
+       if (kw == this->getKeywords().end() - 1)
+       {
+           keywords += (*kw);
+       }
+       else
+       {
+           keywords += (*kw + ", ");
+       }
+   }
+
+
+   std::string icon;
+   for (int i = 0; i < 80; i++)
+   {
+       if (i == 79)
+       {
+           icon += std::to_string(icon_[i]);
+       }
+       else
+       {
+           icon += std::to_string(icon_[i]) + " ";
+       }
+   }
+
+
+   std::cout << "Title: " << title_ << "\n"
+             << "Author: " << author_ << "\n"
+             << "ISBN: " << ISBN_ << "\n"
+             << "Icon: " << icon << "\n"
+             << "Price: $" << std::fixed << std::setprecision(2) << price_ << "\n"
+             << "Keywords: " << keywords << "\n"
+             << "Blurb: " << blurb_ << "\n";
 }
-  
+
+
     
