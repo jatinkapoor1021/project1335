@@ -24,9 +24,10 @@ Book::~Book()
 // copy constructor Book::Book(const Book &rhs)
 Book::Book(const Book &rhs)
 {
+    ISBN_ = rhs.ISBN_;
     title_ = rhs.title_;
     author_ = rhs.author_;
-    ISBN_ = rhs.ISBN_;
+   
 
     if (rhs.icon_ != nullptr)
     {
@@ -36,9 +37,10 @@ Book::Book(const Book &rhs)
     else
         icon_ = nullptr;
 
+    blurb_ = rhs.blurb_;
     price_ = rhs.price_;
     keywords_ = rhs.keywords_;
-    blurb_ = rhs.blurb_;
+    
 }
 
 // copy assignment Book &Book::operator=(const Book &rhs)
@@ -78,9 +80,9 @@ Book &Book::operator=(Book &&rhs)
         rhs.icon_ = nullptr;
 
         price_ = rhs.price_;
-
-        keywords_ = std::move(rhs.keywords_);
         blurb_ = std::move(rhs.blurb_);
+        keywords_ = std::move(rhs.keywords_);
+        
     }
     return *this;
 }
@@ -203,11 +205,11 @@ void Book::print() const
         }
     }
 
-    std::cout << "Title: " << title_; 
-              << "Author: " << author_;
-              << "ISBN: " << ISBN_; 
-              << "Icon: " << icon;
-              << "Price: $" << std::fixed << std::setprecision(2) << price_:
-              << "Keywords: " << keywords: 
-              << "Blurb: " << blurb_;
+    std::cout << "Title: " << title_ << "\n"
+              << "Author: " << author_ << "\n"
+              << "ISBN: " << ISBN_ << "\n"
+              << "Icon: " << icon << "\n"
+              << "Price: $" << std::fixed << std::setprecision(2) << price_ << "\n"
+              << "Keywords: " << keywords << "\n"
+              << "Blurb: " << blurb_ << "\n";
 }
